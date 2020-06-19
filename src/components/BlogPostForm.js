@@ -1,18 +1,16 @@
 import React, {useState} from 'react';
 import {View, Text, StyleSheet, TextInput, Button} from 'react-native';
 
-const BlogFormPost = ({onSubmit}) => {
-    const [title, setTitle] = useState('');
-    const [content, setContent] = useState('');
+const BlogFormPost = ({onSubmit, initialValues }) => {
+    const [title, setTitle] = useState(initialValues.title);
+    const [content, setContent] = useState(initialValues.content);
    
     return (
-    <View>
-        <Text style={styles.label}>Enter Title</Text>
+    <View><Text style={styles.label}>Enter Title</Text>
         <TextInput value={title} 
                     onChangeText={(text) => setTitle(text)} 
                     style={styles.input}
-        />
-        <Text style={styles.label}>Enter Content</Text>
+        /><Text style={styles.label}>Enter Content</Text>
         <TextInput value={content}
             onChangeText={(text) => setContent(text)} 
             style={styles.input}

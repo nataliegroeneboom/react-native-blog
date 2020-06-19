@@ -1,43 +1,33 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {View, Text, StyleSheet, FlatList, Button, TouchableOpacity} from 'react-native';
 import { Form, TextValidator } from 'react-native-validator-form';
 import {Feather} from '@expo/vector-icons';
+import {Context} from '../context/BlogContext'
 
 
-class IndexScreen extends React.Component{
-   
-    state = {
-        email: '',
-    }
-    
+const IndexScreen = ({navigation}) => {
 
-    handleChange = (email) => {
-        setState({ email });
-    }
-    render(){
-
+        const {state, addBlogPost, deleteBlogPost} = useContext(Context)
 
         return (
-  
-            <View>
-                    <FlatList 
-                        data={state}
-                        keyExtractor={(blogPost) => blogPost.title}
-                        renderItem={({item}) =>{
-                        return (<TouchableOpacity 
-                            onPress={() => navigation.navigate('Show', {id: item.id})}>
-                                <View style={styles.row}>
-                                <Text style={styles.title}>{item.title} - {item.id}</Text>
-                                <TouchableOpacity onPress={
-                                        () => deleteBlogPost(item.id)
-                                        }>
-                                        <Feather style={styles.icon} name="trash" />
-                                </TouchableOpacity>
+            <View>   
+                <FlatList 
+                    data={state}
+                    keyExtractor={(blogPost) => blogPost.title}
+                    renderItem={({item}) =>{
+                    return (<TouchableOpacity 
+                                onPress={() => navigation.navigate('Show', {id: item.id})}>
+                                <View style={styles.row}><Text style={styles.title}>{item.title} - {item.id}</Text>
+                                    <TouchableOpacity onPress={
+                                            () => deleteBlogPost(item.id)
+                                            }>
+                                            <Feather style={styles.icon} name="trash" />
+                                    </TouchableOpacity>
                                 </View>
-                            </TouchableOpacity>)
-                        } }
-                        />
-                          <Form
+                        </TouchableOpacity>)
+                    } }
+                    />
+                    <Form
                         ref="form"
                         onSubmit={this.handleSubmit}
                     >
@@ -59,7 +49,7 @@ class IndexScreen extends React.Component{
                     </Form>
             </View>
           )
-    }
+    
   
 }
 
